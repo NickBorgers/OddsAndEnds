@@ -1,0 +1,3 @@
+# Get strace for process executed by user
+user=someuser
+waiting=1; while [ $waiting = 1 ]; do pids=$(pgrep -u $user); if [[ ! -z "$pids" ]]; then waiting=0; fi; usleep 100000; done; echo $pids; arrayOfPids=($pids); strace -vvtf -s 256 -e open -p ${arrayOfPids[0]}
